@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cookiegpt-deployment
+  namespace: default
+  # annotations:
+  #   fluxcd.io/automated: "true"
+  #   fluxcd.io/tag.cookiegpt: semver:~1.0 
+  labels:
+    app: cookiegpt
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cookiegpt
+  template:
+    metadata:
+      labels:
+        app: cookiegpt
+    spec:
+      serviceAccountName: cookiegpt-deployment-sa
+      volumes:
+      - name: secrets-store-inline
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "cookiegpt-deployment-aws-secrets"
+      containers:
+      - name: cookiegpt
+        image: docker.io/ernesto906/cookiegpt:1.0.8 # {"$imagepolicy": "flux-system:cookiegpt"}          
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 5000
+          protocol: TCP
+        volumeMounts:
+        - name: secrets-store-inline
+          mountPath: "/mnt/secrets-store"
+          readOnly: true

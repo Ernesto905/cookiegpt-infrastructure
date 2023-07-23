@@ -1,0 +1,9 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: cookiegpt
+  namespace: flux-system
+spec:
+  image: docker.io/ernesto906/cookiegpt
+  interval: 1m0s
