@@ -78,7 +78,7 @@ https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-ac
 \$ kubectl exec -it $(kubectl get pods | awk '/<Deployment-name>-deployment/{print $1}' | head -1) cat /mnt/secrets-store/<Secret-name>; echo
 
 
-## Updates to source code guide through (WITHOUT FLUX)
+## Updates to source code (WITHOUT FLUX)
 At this point, updates to the source code branch (not this one) should automatically be turned into an image and pushed to docker hub. This is done when pushes are made to the main branch.
 
 To reflect the changes here
