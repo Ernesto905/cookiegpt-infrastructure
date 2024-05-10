@@ -1,5 +1,7 @@
 # CookieGPT-Infrastructure 
 
+![Full Architecture](https://github.com/Ernesto905/cookiegpt-infrastructure/assets/44984106/853d5ca0-cc96-4f2c-ada7-3c3795f48cce)
+
 ## Configuring the cluster locally 
 
 1. Ensure the following command returns the appropriate role
